@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Adivina el número</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    
+    .caja, input, select, button {
+      transition: all 0.3s ease;
+      background : white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 320px;
+    
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+    
+    select, input{
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width :80%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 10px 5px;
+      border: none;
+      border-radius: 8px;
+      background: #667eea;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    
+    button:hover {
+      background: #5a67d8;
+      transform: scale(1.05);
+    }
+ 
+    #mensaje {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #tiempo {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #444;
+    }
+    
+    .animar {
+      transform: scale(1.2);
+    }
+    .ganar { 
+      animation: ganarAnim 0.6s ease;
+    }
+    @keyframes ganarAnim {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    } 
+    
+    .error {
+      animation: errorAnim 0.4s;
+    }
+
+    @keyframes errorAnim {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% {transform: translateX(0); }
+    }
+
+    input:focus {
+      outline: none;
+      border: 2px solid #667eea;
+      box-shadow: 0 0 8px rgba(102,126,234,0.5);
+    }
+
+    button, input, .caja {
+     transition: all 0.2s ease;
+    }
+    .dark {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white;
+    }
+    
+    .dark .caja {
+      background:#2a2a3d;
+      color: white;
+    }
+
+    .dark input,
+    .dark select {
+      background: #3a3a50;
+      color: white;
+      border: 1px solid #555;
+    }
+
+    .dark button {
+      background: #444;
+    }  
+
+    .dark button:hover {
+      background: #666;
+    }
+
+  </style>
+</head>
+
+<body>
+ 
+<div class="caja">
+  <h1>🕹️ Adivina el número</h1>
+  <button id="modoBtn"> 🌙 Modo oscuro</button> 
+<select id="nivel">
+  <option value="10">Fácil (1-10)</option>
+  <option value="50">Medio (1-50)</option>
+  <option value="100">Difícil (1-100)</option>
+</select>
+
+  <p id="instruccion">Escribe un número</p>
+  
+  <input id="numero" type="number" min="1" autofocus required>
+
+  <button id="boton">Probar</button>
+  <button id="reiniciar">Reiniciar</button>
+  <button id="instalarBtn" style="display:none;">📲  Instalar app </button>
+  <p id="mensaje"></p>
+  <p id="tiempo">Tiempo : 10</p>
+
+  <h3>📜 Historial</h3>
+<ul id="historial"></ul>
+ <button id="borrarHistorial">Borrar historial</button>
+
+ <h3>🏆 Logros</h3>
+ <ul id="logros"></ul>
+ <h3>📊 Estadísticas</h3>
+ <ul id="stats"></ul>
+
+ </div>
+
+ <audio id="sonidoGanar" src="sonidos/ganar.mp3"></audio>
+ <audio id="sonidoPerder" src="sonidos/perder.mp3"></audio>
+ <audio id="sonidoError" src="sonidos/error.mp3"></audio>
+ <script src="script.js" defer></script>
+
+
+
+</body>
+</html>
+
+
+ 
